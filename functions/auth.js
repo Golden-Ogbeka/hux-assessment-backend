@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const AdminModel = require('../api/v1/models/admin.model');
+const UserModel = require('../api/v1/models/user.model');
 
 const getUserDetails = async (req) => {
   const authorization = req.headers.authorization;
@@ -10,7 +10,7 @@ const getUserDetails = async (req) => {
 
   if (!tokenData) throw new Error(tokenData);
 
-  const adminDetails = await AdminModel.findOne({
+  const adminDetails = await UserModel.findOne({
     email: tokenData?.email,
   });
 

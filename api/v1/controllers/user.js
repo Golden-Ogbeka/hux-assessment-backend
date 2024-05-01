@@ -105,7 +105,7 @@ const Controller = () => {
       const emailToSend = {
         body: {
           greeting: 'Dear',
-          name: existingUser?.firstName,
+          name: existingUser?.fullName,
           intro:
             'You have received this email because a password reset request for your account was received.',
           action: {
@@ -165,7 +165,7 @@ const Controller = () => {
         const emailToSend = {
           body: {
             greeting: 'Dear',
-            name: existingUser?.firstName,
+            name: existingUser?.fullName,
             intro: 'You have successfully reset your password',
             signature: 'Regards',
             outro:

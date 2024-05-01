@@ -1,4 +1,3 @@
-const { getUserDetails } = require('../../../functions/auth');
 const { validationResult } = require('express-validator');
 const ContactModel = require('../models/contact.model');
 
@@ -12,7 +11,7 @@ const Controller = () => {
 
       // find all contacts
 
-      const contactsData = await ContactModel.find().sort({ name: 1 });
+      const contactsData = await ContactModel.find().sort({ firstName: 1 });
 
       return res.status(200).json({
         message: 'All Contacts Retrieved',
@@ -81,8 +80,6 @@ const Controller = () => {
       let { firstName, lastName, phoneNumber } = req.body;
 
       const { id } = req.params;
-
-      const userDetails = await getUserDetails(req);
 
       // Check if Contact exists
       const existingContact = await ContactModel.findById(id);

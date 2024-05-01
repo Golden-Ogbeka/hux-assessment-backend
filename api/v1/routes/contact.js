@@ -5,7 +5,6 @@ const { Router } = require('express');
 const { body, header, param } = require('express-validator');
 
 const Controller = require('../controllers/contact');
-const { doesContactExist } = require('../middlewares/contact');
 
 const router = Router();
 const ContactController = Controller();
@@ -67,8 +66,7 @@ router.post(
       .trim()
       .exists()
       .notEmpty()
-      .withMessage('Phone number cannot be empty')
-      .custom((value) => doesContactExist(value)),
+      .withMessage('Phone number cannot be empty'),
   ],
   ContactController.AddContact
 );

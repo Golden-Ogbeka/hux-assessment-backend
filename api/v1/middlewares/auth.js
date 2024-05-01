@@ -11,7 +11,6 @@ const isValidUser = async (value) => {
     // Check if admin exists and is activated
     const isValidUser = await UserModel.findOne({
       email: tokenData?.email,
-      active: true,
     });
 
     if (!isValidUser) throw 'Unauthorized! Contact Admin';

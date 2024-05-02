@@ -116,7 +116,7 @@ const Controller = () => {
               fallback: true,
               link: `${
                 process.env.WEBSITE_URL || ''
-              }/auth/reset-password?email=${
+              }/auth/reset-password/?email=${
                 existingUser?.email
               }&verificationCode=${verificationCode}`,
             },

@@ -1,5 +1,6 @@
 const { validationResult } = require('express-validator');
 const ContactModel = require('../models/contact.model');
+const { getUserDetails } = require('../../../functions/auth');
 
 const Controller = () => {
   const GetContacts = async (req, res) => {
@@ -9,15 +10,20 @@ const Controller = () => {
       if (!errors.isEmpty())
         return res.status(422).json({ errors: errors.array() });
 
-      // find all contacts
+      const user = await getUserDetails(req);
 
-      const contactsData = await ContactModel.find().sort({ firstName: 1 });
+      // find all contacts for user
+
+      const contactsData = await ContactModel.find({
+        user: user.email,
+      }).sort({ firstName: 1 });
 
       return res.status(200).json({
         message: 'All Contacts Retrieved',
         data: contactsData,
       });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ message: 'Internal Server Error' });
     }
   };
@@ -55,10 +61,13 @@ const Controller = () => {
 
       const { firstName, lastName, phoneNumber } = req.body;
 
+      const user = await getUserDetails(req);
+
       const contactData = new ContactModel({
         firstName,
         lastName,
         phoneNumber,
+        user: user.email,
       });
       await contactData.save();
 

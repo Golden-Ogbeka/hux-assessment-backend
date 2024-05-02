@@ -17,6 +17,7 @@ const isValidUser = async (value) => {
 
     return true;
   } catch (error) {
+    console.log(error);
     throw error || 'Login to continue';
   }
 };

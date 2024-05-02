@@ -6,6 +6,7 @@ const contactSchema = new Schema(
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
     phoneNumber: { type: String, required: true },
+    user: { type: String, required: true },
   },
   { timestamps: true }
 );
